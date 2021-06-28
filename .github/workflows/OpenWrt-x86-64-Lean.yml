@@ -19,8 +19,8 @@ on:
     types: [published]
 
 # 点赞触发
-#  watch:
-#    types: [started]
+  watch:
+    types: [started]
 
 # 编辑触发
 #  push:
@@ -108,14 +108,12 @@ jobs:
     - name: 整理文件
       run: |
         mkdir -p ./artifact/firmware
-        mkdir -p ./artifact/vmware
         mkdir -p ./artifact/package
         mkdir -p ./artifact/buildinfo
         rm -rf $(find openwrt/bin/targets/ -type d -name "packages")
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*img*") ./artifact/firmware/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*vmdk*") ./artifact/vmware/
 
     - name: 上传固件
       uses: actions/upload-artifact@v2
@@ -123,11 +121,11 @@ jobs:
         name: OpenWrt-firmware-Lean-${{ env.FILE_DATE }}
         path: ./artifact/firmware/
 
-    - name: 上传vmware镜像
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt-vmware-Lean-${{ env.FILE_DATE }}
-        path: ./artifact/vmware/
+    #- name: 上传vmware镜像
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: OpenWrt-vmware-Lean-${{ env.FILE_DATE }}
+    #    path: ./artifact/vmware/
 
     - name: 上传插件包
       uses: actions/upload-artifact@v2
@@ -141,16 +139,16 @@ jobs:
         name: OpenWrt-buildinfo-Lean-${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
-    - name: 上传固件到奶牛快传
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-
-    - name: 上传固件到 WeTransfer
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
-        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+    #- name: 上传固件到奶牛快传
+    #  run: |
+    #    curl -fsSL git.io/file-transfer | sh
+    #    ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
+    #    echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+    #
+    #- name: 上传固件到 WeTransfer
+    #  run: |
+    #    curl -fsSL git.io/file-transfer | sh
+    #    ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
+    #    echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
 
