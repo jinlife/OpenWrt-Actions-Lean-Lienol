@@ -5,16 +5,12 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;21.02#src-git luci https://github.com/Lienol/openwrt-luci.git;19.07#g' feeds.conf.default #更换luci版本
+sed -i 's#src-git luci https://github.com/Lienol/openwrt-luci.git;17.01#src-git luci https://github.com/Lienol/openwrt-luci.git;19.07#g' feeds.conf.default #更换luci版本
 cat feeds.conf.default
-
-#echo -e "\nsrc-git xiangfeidexiaohuo https://github.com/xiangfeidexiaohuo/openwrt-packages" >> feeds.conf.default
-# echo -e "src-git passwall https://github.com/xiaorouji/openwrt-passwall" >> feeds.conf.default
-
 
 # 添加第三方软件包
 git clone https://github.com/db-one/dbone-packages.git -b 19.07 package/dbone-packages
-#git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
+# git clone https://github.com/garypang13/openwrt-packages package/graypang13-packages
 
 # 更新并安装源
 ./scripts/feeds clean
@@ -174,10 +170,10 @@ CONFIG_PACKAGE_luci-app-arpbind=y #IP/MAC ARP绑定
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardHome去广告服务
 CONFIG_PACKAGE_luci-app-socat=y #IPV6 端口映射 IPV4
 
-CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
-CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
-CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-sfe=n #高通开源的 Shortcut FE 转发加速引擎
+CONFIG_PACKAGE_luci-app-flowoffload=n #开源 Linux Flow Offload 驱动
+CONFIG_PACKAGE_luci-app-frpc=n #Frp内网穿透
+CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-adbyby-plus=n #adbyby去广告
 CONFIG_PACKAGE_luci-app-wol=n #网络唤醒
 CONFIG_PACKAGE_luci-app-control-timewol=n #定时唤醒

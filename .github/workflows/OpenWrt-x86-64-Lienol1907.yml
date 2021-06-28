@@ -7,7 +7,7 @@
 #
 
 
-name: OpenWrt-x86-64-Lienol2102
+name: OpenWrt-x86-64-Lienol1907
 
 on:
 # 定时触发(每天早5点)
@@ -34,13 +34,13 @@ on:
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: 21.02
-  DIY_SH: OpenWrt-x86-64-Lienol2102.sh
+  REPO_BRANCH: 19.07
+  DIY_SH: OpenWrt-x86-64-Lienol1907.sh
   TZ: Asia/Shanghai
 
 jobs:
   build_openwrt:
-    name: OpenWrt-x86-64-Lienol2102
+    name: OpenWrt-x86-64-Lienol1907
     if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-latest
 
@@ -118,7 +118,7 @@ jobs:
     - name: 上传固件
       uses: actions/upload-artifact@v2
       with:
-        name: OpenWrt-firmware-Lienol2102-${{ env.FILE_DATE }}
+        name: OpenWrt-firmware-Lienol1907-${{ env.FILE_DATE }}
         path: ./artifact/firmware/
 
     #- name: 上传vmware镜像
@@ -130,13 +130,13 @@ jobs:
     - name: 上传插件包
       uses: actions/upload-artifact@v2
       with:
-        name: OpenWrt-package-Lienol2102-${{ env.FILE_DATE }}
+        name: OpenWrt-package-Lienol1907-${{ env.FILE_DATE }}
         path: ./artifact/package/
 
     - name: 上传固件信息
       uses: actions/upload-artifact@v2
       with:
-        name: OpenWrt-buildinfo-Lienol2102-${{ env.FILE_DATE }}
+        name: OpenWrt-buildinfo-Lienol1907-${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
     #- name: 上传固件到奶牛快传

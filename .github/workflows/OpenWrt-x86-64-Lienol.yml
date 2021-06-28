@@ -34,7 +34,7 @@ on:
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: 19.07
+  REPO_BRANCH: main
   DIY_SH: OpenWrt-x86-64-Lienol.sh
   TZ: Asia/Shanghai
 
